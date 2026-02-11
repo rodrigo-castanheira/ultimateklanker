@@ -1,6 +1,6 @@
-const int LedRed = 8;
-const int FastbuttonPin = 4;
-const int SlowbuttonPin = 2;
+const int LED_RED = 8;
+const int FAST_BUTTON_PIN = 4;
+const int SLOW_BUTTON_PIN = 2;
 
 int fastbuttonState = 0;
 int lastfastbuttonState = 0;
@@ -11,14 +11,14 @@ bool isFastMode = false;
 bool isSlowMode = false;
 
 void setup() {
-  pinMode(LedRed, OUTPUT);
-  pinMode(FastbuttonPin, INPUT);
-  pinMode(SlowbuttonPin, INPUT);
+  pinMode(LED_RED, OUTPUT);
+  pinMode(FAST_BUTTON_PIN, INPUT);
+  pinMode(SLOW_BUTTON_PIN, INPUT);
 }
 
 void loop() {
-  fastbuttonState = digitalRead(FastbuttonPin);
-  slowbuttonState = digitalRead(SlowbuttonPin);
+  fastbuttonState = digitalRead(FAST_BUTTON_PIN);
+  slowbuttonState = digitalRead(SLOW_BUTTON_PIN);
 
   if (fastbuttonState == HIGH && lastfastbuttonState == LOW) {
     isFastMode = !isFastMode;
@@ -42,19 +42,19 @@ void loop() {
   lastslowbuttonState = slowbuttonState;
 
   if (isFastMode == true) {
-    digitalWrite(LedRed, LOW);
+    digitalWrite(LED_RED, LOW);
     delay(500); 
-    digitalWrite(LedRed, HIGH);
+    digitalWrite(LED_RED, HIGH);
     delay(500);
   } else if (isSlowMode == true) {
-    digitalWrite(LedRed, LOW);
+    digitalWrite(LED_RED, LOW);
     delay(2000); 
-    digitalWrite(LedRed, HIGH);
+    digitalWrite(LED_RED, HIGH);
     delay(2000);
   } else {
-    digitalWrite(LedRed, LOW);
+    digitalWrite(LED_RED, LOW);
     delay(1000);
-    digitalWrite(LedRed, HIGH);
+    digitalWrite(LED_RED, HIGH);
     delay(1000);
   }
 }
