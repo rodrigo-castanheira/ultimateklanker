@@ -1,19 +1,19 @@
-const int LeftForward = 11;
-const int LeftBackward = 10;
-const int RightBackward = 3;
-const int RightForward = 8;
-const int RotatorOne = 5;
-const int RotatorTwo = 6;
+const int LEFT_FORWARD = 6;
+const int RIGHT_FORWARD = 5;
+const int LEFT_BACKWARD = 11;
+const int RIGHT_BACKWARD = 10;
+const int ROTATOR_LEFT = 3;
+const int ROTATOR_RIGHT = 2;
 
 void setup() {
-  pinMode(LeftForward, OUTPUT);
-  pinMode(LeftBackward, OUTPUT);
-  pinMode(RightBackward, OUTPUT);
-  pinMode(RightForward, OUTPUT);
-  pinMode(RotatorOne, OUTPUT);
-  pinMode(RotatorTwo, OUTPUT);
+  pinMode(LEFT_FORWARD, OUTPUT);
+  pinMode(RIGHT_FORWARD, OUTPUT);
+  pinMode(LEFT_BACKWARD, OUTPUT);
+  pinMode(RIGHT_BACKWARD, OUTPUT);
+  pinMode(ROTATOR_LEFT, OUTPUT);
+  pinMode(ROTATOR_RIGHT, OUTPUT);
 }
 
 void loop() {
-
+  // GG
 }
