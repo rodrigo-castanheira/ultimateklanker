@@ -1,7 +1,7 @@
 const int LEFT_FORWARD = 11;
 const int LEFT_BACKWARD = 10;
 const int RIGHT_BACKWARD = 3;
-const int RIGHT_FORWARD = 8;
+const int RIGHT_FORWARD = 9;
 
 int oneMeterDelay = 4000;
 
