@@ -1,5 +1,5 @@
 const int LedRed = 8;
-const int FastButtonPin = 2;
+const int FastButtonPin = 9;
 const int SlowButtonPin = 4;
 
 int fastButtonState = 0;
