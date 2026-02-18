@@ -4,7 +4,7 @@ const int LEFT_BACKWARD = 11;
 const int RIGHT_BACKWARD = 10;
 
 const int LEFT_SPEED = 255;
-const int RIGHT_SPEED = 245;
+const int RIGHT_SPEED = 255;
 
 int oneMeterDelay = 4000;
 
@@ -21,10 +21,10 @@ void setup() {
   delay(oneMeterDelay);
   stopMotors();
   turnLeft();
-  delay(600);
+  delay(700);
   stopMotors();
   turnRight();
-  delay(550);
+  delay(650);
   stopMotors();
 }
 
@@ -45,8 +45,8 @@ void moveBackward(){
 }
 
 void turnLeft(){
-  digitalWrite(LEFT_FORWARD, LOW);
-  analogWrite(LEFT_BACKWARD, LEFT_SPEED);
+//  digitalWrite(LEFT_FORWARD, LOW);
+//  analogWrite(LEFT_BACKWARD, LEFT_SPEED);
   analogWrite(RIGHT_FORWARD, RIGHT_SPEED);
   digitalWrite(RIGHT_BACKWARD, LOW);
 }
@@ -54,8 +54,8 @@ void turnLeft(){
 void turnRight(){
   analogWrite(LEFT_FORWARD, LEFT_SPEED);
   digitalWrite(LEFT_BACKWARD, LOW);
-  digitalWrite(RIGHT_FORWARD, LOW);
-  analogWrite(RIGHT_BACKWARD, RIGHT_SPEED);
+//  digitalWrite(RIGHT_FORWARD, LOW);
+//  analogWrite(RIGHT_BACKWARD, RIGHT_SPEED);
 }
 
 void stopMotors(){

@@ -27,5 +27,5 @@ void loop() {
     delay(trafficDelay);
     digitalWrite(LedYellow, HIGH);
     digitalWrite(LedRed, LOW);
-    }
+  }
 }

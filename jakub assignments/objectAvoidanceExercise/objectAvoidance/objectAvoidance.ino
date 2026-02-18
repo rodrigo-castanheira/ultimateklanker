@@ -22,6 +22,7 @@ void setup(){
   pinMode(RIGHT_BACKWARD, OUTPUT);
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
+  delay(3000);
 }
 
 void loop(){
@@ -81,13 +82,13 @@ void squareSequence(){
   delay(quarterSecondDelay);
   stopMotors();
   turnRight();
-  delay(almostOneSecondDelay);
+  delay(halfSecondDelay);
   stopMotors();
   moveForward();
   delay(oneSecondDelay);
   stopMotors();
   turnLeft();
-  delay(almostOneSecondDelay);
+  delay(halfSecondDelay);
   stopMotors();
   moveForward();
   delay(twoSecondDelay);
@@ -96,10 +97,10 @@ void squareSequence(){
   delay(halfSecondDelay);
   stopMotors();
   moveForward();
-  delay(twoSecondDelay);
+  delay(oneSecondDelay);
   stopMotors();
   turnRight();
-  delay(quarterSecondDelay);
+  delay(halfSecondDelay);
   stopMotors();
 }
 
