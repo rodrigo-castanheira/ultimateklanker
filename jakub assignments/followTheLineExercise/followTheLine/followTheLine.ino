@@ -73,6 +73,7 @@ void loop() {
   else if (s7 > threshold && s8 > threshold){
     moveMotors(0, baseSpeed + 55); 
   }
+}
 
 void countLeft(){
   rotationCounterLeft++;
