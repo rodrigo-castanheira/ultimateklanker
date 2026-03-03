@@ -9,6 +9,7 @@ const int RIGHT_SPEED = 245;
 int oneMeterDelay = 4000;
 
 void setup() {
+  Serial.begin(9600);
   pinMode(LEFT_FORWARD, OUTPUT);
   pinMode(RIGHT_FORWARD, OUTPUT);
   pinMode(LEFT_BACKWARD, OUTPUT);

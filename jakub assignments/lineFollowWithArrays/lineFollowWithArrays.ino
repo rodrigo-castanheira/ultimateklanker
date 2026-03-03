@@ -4,10 +4,14 @@ const int BACK_LEFT = 11;
 const int BACK_RIGHT = 10;
 const int ECHO_PIN = 7;
 const int TRIGGER_PIN = 12;
-const int SENSOR_LEFT = 2;
-const int SENSOR_RIGHT = 3;
+const int ENCODER_LEFT = 2;
+const int ENCODER_RIGHT = 3;
 
-int threshold = 480;
+const int SENSOR_PINS[] = {A0, A1, A2, A4, A3, A5, A6, A7};
+int s[8];
+
+const int threshold = 480;
+const int sensorStopValue = 900;
 int baseSpeed = 215;
 
 volatile long rotationCounterLeft = 0;
@@ -23,60 +27,57 @@ void setup() {
   pinMode(BACK_RIGHT, OUTPUT);
   pinMode(ECHO_PIN, INPUT_PULLUP);
   pinMode(TRIGGER_PIN, OUTPUT);
-  pinMode(SENSOR_LEFT, INPUT_PULLUP);
-  pinMode(SENSOR_RIGHT, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(SENSOR_LEFT), countLeft, RISING);
-  attachInterrupt(digitalPinToInterrupt(SENSOR_RIGHT), countRight, RISING);
+  pinMode(ENCODER_LEFT, INPUT_PULLUP);
+  pinMode(ENCODER_RIGHT, INPUT_PULLUP);
   
-  delay(2000);
+  attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT), countLeft, RISING);
+  attachInterrupt(digitalPinToInterrupt(ENCODER_RIGHT), countRight, RISING);
 }
 
 void loop() {  
-  int s1 = analogRead(A0);
-  int s2 = analogRead(A1);
-  int s3 = analogRead(A2);
-  int s4 = analogRead(A4);
-  int s5 = analogRead(A3);
-  int s6 = analogRead(A5);
-  int s7 = analogRead(A6);
-  int s8 = analogRead(A7);
+  for (int i = 0; i < 8; i++) {
+    s[i] = analogRead(SENSOR_PINS[i]);
+  }
 
-//  Serial.println(s1);
-//  Serial.println(s2);
-//  Serial.println(s3);
-//  Serial.println(s4);
-//  Serial.println(s5);
-//  Serial.println(s6);
-//  Serial.println(s7);
-//  Serial.println(s8);
+//  Serial.println(s[0]);
+//  Serial.println(s[1]);
+//  Serial.println(s[2]);
+//  Serial.println(s[3]);
+//  Serial.println(s[4]);
+//  Serial.println(s[5]);
+//  Serial.println(s[6]);
+//  Serial.println(s[7]);
 //  Serial.println("__________");
 //  delay(2000);
-  
-  if((s4 > threshold && s5 > threshold) || (s2 > threshold && s3 > threshold && s4 > threshold && s5 > threshold) || (s4 > threshold && s5 > threshold && s6 > threshold && s7 > threshold && s8 > threshold)) {
-    balanceMotors(baseSpeed + 55, true);
+
+    if(s[0] > sensorStopValue && s[1] > sensorStopValue && s[2] > sensorStopValue && s[3] > sensorStopValue && 
+       s[4] > sensorStopValue && s[5] > sensorStopValue && s[6] > sensorStopValue && s[7] > sensorStopValue){
+      stopMotors();
+    }
+    else if((s[3] > threshold && s[4] > threshold) || 
+       (s[1] > threshold && s[2] > threshold && s[3] > threshold && s[4] > threshold) || 
+       (s[3] > threshold && s[4] > threshold && s[5] > threshold && s[6] > threshold && s[7] > threshold)) {
+      balanceMotors(baseSpeed + 55, true);
+    }
+    else if (s[2] > threshold && s[3] > threshold) {
+      moveMotors(baseSpeed + 20, baseSpeed - 20);
+    } 
+    else if (s[4] > threshold && s[5] > threshold) {
+      moveMotors(baseSpeed - 20, baseSpeed + 20);
+    }
+    else if (s[1] > threshold){
+      moveMotors(baseSpeed + 40, 0); 
+    }
+    else if (s[6] > threshold){
+      moveMotors(0, baseSpeed + 40); 
+    }
+    else if (s[1] > threshold && s[0] > threshold){
+      moveMotors(baseSpeed + 55, 0); 
+    }
+    else if (s[6] > threshold && s[7] > threshold){
+      moveMotors(0, baseSpeed + 55); 
+    }
   }
-  else if (s3 > threshold && s4 > threshold) {
-    moveMotors(baseSpeed + 20, baseSpeed - 20);
-  } 
-  else if (s5 > threshold && s6 > threshold) {
-    moveMotors(baseSpeed - 20, baseSpeed + 20);
-  }
-  else if (s2 > threshold){
-    moveMotors(baseSpeed + 40, 0); 
-  }
-  else if (s7 > threshold){
-    moveMotors(0, baseSpeed + 40); 
-  }
-  else if (s2 > threshold && s1 > threshold){
-    moveMotors(baseSpeed + 55, 0); 
-  }
-  else if (s7 > threshold && s8 > threshold){
-    moveMotors(0, baseSpeed + 55); 
-  }
-  else if (s1 > threshold && s2 > threshold && s3 > threshold && s4 > threshold && s5 > threshold && s6 > threshold && s7 > threshold && s8 > threshold){
-    stopMotors();
-  }
-}
 
 void countLeft(){
   rotationCounterLeft++;

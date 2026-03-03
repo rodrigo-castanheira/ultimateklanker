@@ -16,6 +16,7 @@ int oneSecondDelay = 1000;
 int twoSecondDelay = 2000;
 
 void setup(){
+  Serial.begin(9600);
   pinMode(LEFT_FORWARD, OUTPUT);
   pinMode(RIGHT_FORWARD, OUTPUT);
   pinMode(LEFT_BACKWARD, OUTPUT);
