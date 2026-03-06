@@ -56,23 +56,23 @@ void loop() {
       moveMotors(baseSpeed - 20, baseSpeed + 20);
     }
     else if (s[1] > threshold){
-      moveMotors(baseSpeed + 40, 0); 
+      moveMotors(baseSpeed + 35, 0); 
     }
     else if (s[6] > threshold){
-      moveMotors(0, baseSpeed + 40); 
+      moveMotors(0, baseSpeed + 35); 
     }
     else if (s[1] > threshold && s[0] > threshold){
-      moveMotors(baseSpeed + 55, 0); 
+      moveMotors(baseSpeed + 35, 0); 
     }
     else if (s[6] > threshold && s[7] > threshold){
-      moveMotors(0, baseSpeed + 55); 
+      moveMotors(0, baseSpeed + 35); 
     }
   }
 
 void moveMotors(int left, int right) {
-  analogWrite(FORWARD_LEFT, constrain(left, 0, 255));
+  analogWrite(FORWARD_LEFT, left);
   analogWrite(BACK_LEFT, 0);
-  analogWrite(FORWARD_RIGHT, constrain(right, 0, 255));
+  analogWrite(FORWARD_RIGHT, right);
   analogWrite(BACK_RIGHT, 0);
 }
 
