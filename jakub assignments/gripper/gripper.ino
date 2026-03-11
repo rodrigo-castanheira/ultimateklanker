@@ -3,54 +3,66 @@ const int LEFT_FORWARD = 6;
 const int RIGHT_FORWARD = 5;
 const int LEFT_BACKWARD = 11;
 const int RIGHT_BACKWARD = 10;
-
-const int OPEN_CLAWS_MS  = 1950;
+const int OPEN_CLAWS_MS  = 1500;
 const int CLOSE_CLAWS_MS = 1050;
-int servoTargetValue = OPEN_CLAWS_MS;
+const int ONE_SEC_DELAY = 1000;
+const int PULSES_VALUE = 800;
+int servoTargetValue;
 long lastServoStatus = 0;
 
 void setup() {
   pinMode(SERVO_PIN, OUTPUT);
+  digitalWrite(SERVO_PIN, LOW);
   pinMode(LEFT_FORWARD, OUTPUT);
+  digitalWrite(LEFT_FORWARD, LOW);
   pinMode(RIGHT_FORWARD, OUTPUT);
+  digitalWrite(RIGHT_FORWARD, LOW);
   pinMode(LEFT_BACKWARD, OUTPUT);
+  digitalWrite(LEFT_BACKWARD, LOW);
   pinMode(RIGHT_BACKWARD, OUTPUT);
+  digitalWrite(RIGHT_BACKWARD, LOW);
 
-  delay(1000);
-  moveForward();
-  delay(1000);
-  stopMotors();
-  delay(1000);
   servoTargetValue = OPEN_CLAWS_MS;
-  moveClaws(800);
+  moveClaws(PULSES_VALUE);
   servoTargetValue = CLOSE_CLAWS_MS;
-  moveClaws(1000);
-  moveForward();
-  delay(1000);
-  stopMotors();
-  delay(1000);
+  moveClaws(PULSES_VALUE);
   servoTargetValue = OPEN_CLAWS_MS;
-  moveClaws(800);
+  moveClaws(PULSES_VALUE);
+  delay(ONE_SEC_DELAY);
+  moveForward();
+  delay(ONE_SEC_DELAY);
+  stopMotors();
+  delay(ONE_SEC_DELAY);
+  servoTargetValue = OPEN_CLAWS_MS;
+  moveClaws(PULSES_VALUE);
+  servoTargetValue = CLOSE_CLAWS_MS;
+  moveClaws(PULSES_VALUE);
+  moveForward();
+  delay(ONE_SEC_DELAY);
+  stopMotors();
+  delay(ONE_SEC_DELAY);
+  servoTargetValue = OPEN_CLAWS_MS;
+  moveClaws(PULSES_VALUE);
 }
 
 void loop() {
   servoUpdate();
 }
 
-void servoUpdate() {
-  long now = millis();
-  if(now - lastServoStatus >= 20){
-    lastServoStatus = now;
-    digitalWrite(SERVO_PIN, HIGH);
-    delayMicroseconds(servoTargetValue);
-    digitalWrite(SERVO_PIN, LOW);
-  }
-}
-
 void moveClaws(long ms) {
   long start = millis();
   while(millis() - start < ms){
     servoUpdate();
+  }
+}
+
+void servoUpdate() {
+  //long now = millis();
+  if(millis() > lastServoStatus){
+    lastServoStatus = millis() + 20;
+    digitalWrite(SERVO_PIN, HIGH);
+    delayMicroseconds(servoTargetValue);
+    digitalWrite(SERVO_PIN, LOW);
   }
 }
 

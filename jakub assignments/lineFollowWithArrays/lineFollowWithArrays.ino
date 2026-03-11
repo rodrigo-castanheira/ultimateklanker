@@ -56,16 +56,16 @@ void loop() {
       moveMotors(baseSpeed - 20, baseSpeed + 20);
     }
     else if (s[1] > threshold){
-      moveMotors(baseSpeed + 35, 0); 
+      moveMotors(baseSpeed + 40, 0); 
     }
     else if (s[6] > threshold){
-      moveMotors(0, baseSpeed + 35); 
+      moveMotors(0, baseSpeed + 40); 
     }
     else if (s[1] > threshold && s[0] > threshold){
-      moveMotors(baseSpeed + 35, 0); 
+      moveMotors(baseSpeed + 55, 0); 
     }
     else if (s[6] > threshold && s[7] > threshold){
-      moveMotors(0, baseSpeed + 35); 
+      moveMotors(0, baseSpeed + 55); 
     }
   }
 
